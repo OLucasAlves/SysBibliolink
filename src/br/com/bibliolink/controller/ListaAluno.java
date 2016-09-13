@@ -1,34 +1,28 @@
 package br.com.bibliolink.controller;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.bibliolink.model.bean.Autor;
-import br.com.bibliolink.model.dao.AutorDAO;
+import br.com.bibliolink.model.bean.Aluno;
+import br.com.bibliolink.model.dao.AlunoDAO;
 
-public class AdicionaAutor implements Logica{
+public class ListaAluno implements Logica{
 
 	@Override
 	public void executa(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
-		
-		Autor autor = new Autor();
-		
 		Connection connection = (Connection) req.getAttribute("conexao");
 		
-		autor.setNome(req.getParameter("nome"));
+		List<Aluno> alunos = new AlunoDAO(connection).listaAluno();
 		
-		AutorDAO dao = new AutorDAO(connection);
-		dao.adicionaAutor(autor);
-		
-		System.out.println("executando logica");
-		
-		RequestDispatcher rd = req.getRequestDispatcher("/testa.jsp");
+		req.setAttribute("alunos", alunos);
+		connection.close();
+		RequestDispatcher rd = req.getRequestDispatcher("/lista-aluno.jsp");
 		rd.forward(req, res);
-		
 	}
 
 }

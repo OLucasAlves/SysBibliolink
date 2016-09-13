@@ -17,12 +17,12 @@ public class ControllerServlet extends HttpServlet{
 		String nomeDaClasse = "br.com.bibliolink.controller." + parametro;
 		
 		try{
-			Class classe = Class.forName(nomeDaClasse);
+			Class<?> classe = Class.forName(nomeDaClasse);
 			
 			Logica logica = (Logica) classe.newInstance();
-			String pagina = logica.executa(req, res);
+			logica.executa(req, res);
 			
-			req.getRequestDispatcher(pagina).forward(req, res);
+			
 		}catch(Exception e){
 			throw new ServletException(e);
 		}

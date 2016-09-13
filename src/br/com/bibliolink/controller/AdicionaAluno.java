@@ -3,6 +3,7 @@ package br.com.bibliolink.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialException;
@@ -13,7 +14,7 @@ import br.com.bibliolink.model.dao.AlunoDAO;
 public class AdicionaAluno implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest req, HttpServletResponse res)
+	public void executa(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		
 		Aluno aluno = new Aluno();
@@ -28,6 +29,9 @@ public class AdicionaAluno implements Logica{
 		dao.adicionaAluno(aluno);
 		
 		System.out.println("executando logica");
-		return "testa.jsp";
+		
+		RequestDispatcher rd = req.getRequestDispatcher("/lista.jsp");
+		rd.forward(req, res);
+		
 	}
 }

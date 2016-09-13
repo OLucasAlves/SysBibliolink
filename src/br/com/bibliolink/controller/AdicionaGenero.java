@@ -2,6 +2,7 @@ package br.com.bibliolink.controller;
 
 import java.sql.Connection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +12,7 @@ import br.com.bibliolink.model.dao.GeneroDAO;
 public class AdicionaGenero implements Logica{
 
 	@Override
-	public String executa(HttpServletRequest req, HttpServletResponse res)
+	public void executa(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		
 		Genero genero = new Genero();
@@ -24,7 +25,9 @@ public class AdicionaGenero implements Logica{
 		dao.adicionaGenero(genero);
 		
 		System.out.println("executando logica");
-		return "testa.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher("/testa.jsp");
+		rd.forward(req, res);
+		
 	}
 
 }
