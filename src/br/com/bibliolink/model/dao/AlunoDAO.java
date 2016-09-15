@@ -80,6 +80,21 @@ public class AlunoDAO {
 		}
 	}
 	
+	public void remover(Aluno aluno){
+		String sql = "delete from aluno where matricula=?";
+		
+		try{
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setLong(1, aluno.getMatricula());
+			
+			pstmt.execute();
+			pstmt.close();
+		}catch(SQLException e){
+			throw new RuntimeException(e);
+			
+		}
+	}
+	
 	public Aluno buscaPorId(Long matricula){
 		try{
 			PreparedStatement pstmt = connection.prepareStatement("select * from aluno");
