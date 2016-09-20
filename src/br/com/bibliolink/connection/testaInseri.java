@@ -2,10 +2,8 @@ package br.com.bibliolink.connection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
-import br.com.bibliolink.model.bean.Aluno;
-import br.com.bibliolink.model.dao.AlunoDAO;
+import br.com.bibliolink.model.bean.Livro;
 
 public class testaInseri {
 
@@ -21,21 +19,25 @@ public class testaInseri {
 		
 		//Long matricula = (long)2;
 		
+		Livro livro = new Livro();
+		livro.setTitulo("teste");
+		
+		
 		
 		Connection connection = new ConnectionFactory().getConnection();
 
-		AlunoDAO dao = new AlunoDAO(connection);
+		//AlunoDAO dao = new AlunoDAO(connection);
 		//aluno = dao.buscaPorId(matricula);
 		
 		
-		List<Aluno> alunos = dao.listaAluno();
+		/*List<Aluno> alunos = dao.listaAluno();
 		System.out.println("teste");
 		for(Aluno aluno : alunos){
 			System.out.println("Nome" +aluno.getNome());
 			System.out.println("Email" +aluno.getEmail());
 			System.out.println("Telefone" +aluno.getTelefone());
 			System.out.println("Endereco" +aluno.getEndereco());
-		}
+		}*/
 		
 		//dao.alteraAluno(aluno);
 		

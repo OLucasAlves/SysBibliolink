@@ -6,23 +6,24 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.bibliolink.model.bean.Aluno;
-import br.com.bibliolink.model.dao.AlunoDAO;
+import br.com.bibliolink.model.bean.Livro;
+import br.com.bibliolink.model.dao.LivroDAO;
 
-public class RemoveAluno implements Logica{
+public class AdicionaLivro implements Logica{
 
 	@Override
 	public void executa(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
-		Aluno aluno = new Aluno();
 		
+		Livro livro = new Livro();
 		Connection connection = (Connection) req.getAttribute("conexao");
 		
-		Long matricula = Long.parseLong(req.getParameter("matricula"));
-		aluno.setMatricula(matricula);
+		livro.setTitulo(req.getParameter("titulo"));
+		livro.setAutor(req.getParameter("autor"));
+		livro.setGenero(req.getParameter("genero"));
 		
-		AlunoDAO dao = new AlunoDAO(connection);
-		dao.remover(aluno);
+		LivroDAO dao = new LivroDAO(connection);
+		dao.adicionaLivro(livro);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("sis?acesso=ListaLivro");
 		rd.forward(req, res);
